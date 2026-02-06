@@ -1,5 +1,5 @@
 altair==4.2.2
-anyio @ file:///C:/miniconda3/conda-bld/anyio_1758622439618/work
+anyio>=3.7.1
 argon2-cffi @ file:///C:/Users/task_176606774961737/croot/argon2-cffi_1766067889655/work
 argon2-cffi-bindings @ file:///C:/miniconda3/conda-bld/argon2-cffi-bindings_1757925012741/work
 astor==0.8.1
