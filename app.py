@@ -36,8 +36,8 @@ def main():
     st.header("Item Purchase Prediction")
     UserID = st.text_input("UserID","")
     Gender = st.selectbox('Gender',('Male', 'Female'))
-    Age = st.number_input("Insert Age",18,60)
-    EstimatedSalary = st.number_input("Insert salary",15000,150000)
+    Age = st.number_input("Insert Age",5,150)
+    EstimatedSalary = st.number_input("Insert salary",1,1500000)
     resul=""
     if st.button("Predict"):
       result=predict_note_authentication(UserID, Gender,Age,EstimatedSalary)
