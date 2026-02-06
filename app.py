@@ -14,11 +14,11 @@ scalar=pickle.load(pickle_in2)
 def predict_note_authentication(UserID, Gender,Age,EstimatedSalary):
   output= model.predict(scalar.transform(([[Age,EstimatedSalary]])))
   print("Purchased", output)
-  if output==[1]:
-    prediction="Item will be purchased"
-  else:
-    prediction="Item will not be purchased"
-  print(prediction)
+  prediction = output[0]
+  
+   
+
+ 
   return prediction
 def main():
 
@@ -43,10 +43,14 @@ def main():
     resul=""
     if st.button("Predict"):
       result=predict_note_authentication(UserID, Gender,Age,EstimatedSalary)
-      st.success('Model has predicted {}'.format(result))
-    if st.button("About"):
-      st.subheader("Developed by Dr. Navin Kr. Goyal")
-      st.subheader("Associate Professor")
+     
+      if result == 1:
+        st.success("Model has predicted: Purchased ✅")
+      else:
+        st.warning("Model has predicted: Not Purchased ❌")
+     if st.button("About"):
+       st.subheader("Developed by Dr. Navin Kr. Goyal")
+       st.subheader("Associate Professor")
 
 if __name__=='__main__':
   main()
