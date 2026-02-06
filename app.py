@@ -43,9 +43,9 @@ def main():
         result = predict_note_authentication(UserID, Gender, Age, EstimatedSalary)
 
         if result == 1:
-            st.success("Model has predicted: Purchased ✅")
+            st.success("Model has predicted that user can purchased item ✅")
         else:
-            st.warning("Model has predicted: Not Purchased ❌")
+            st.warning("Model has predicted that user can not purchased item ❌")
 
     if st.button("About"):
         st.subheader("Developed by Dr. Navin Kr. Goyal")
