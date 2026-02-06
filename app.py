@@ -12,7 +12,7 @@ model=pickle.load(pickle_in)
 pickle_in2 = open("scalar.pkl","rb")
 scalar=pickle.load(pickle_in2)
 def predict_note_authentication(UserID, Gender,Age,EstimatedSalary):
-  output= model.predict(scalar.transform(([[Age,Estimated_Salary]])))
+  output= model.predict(scalar.transform(([[Age,EstimatedSalary]])))
   print("Purchased", output)
   if output==[1]:
     prediction="Item will be purchased"
