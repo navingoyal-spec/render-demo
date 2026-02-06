@@ -43,7 +43,6 @@ def main():
     resul=""
     if st.button("Predict"):
       result=predict_note_authentication(UserID, Gender,Age,EstimatedSalary)
-     
       if result == 1:
         st.success("Model has predicted: Purchased ✅")
       else:
