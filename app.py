@@ -24,9 +24,10 @@ def main():
    <div class="" style="background-color:blue;" >
    <div class="clearfix">
    <div class="col-md-12">
-   <center><p style="font-size:40px;color:white;margin-top:10px;">PIET</p></center>
-   <center><p style="font-size:30px;color:white;margin-top:10px;">Course on ML</p></center>
-   <center><p style="font-size:25px;color:white;margin-top:10px;"> Project Deployment</p></center>
+   <center><p style="font-size:40px;color:white;margin-top:10px;">Poornima Institue of Engineering & Technology</p></center>
+   <center><p style="font-size:30px;color:white;margin-top:10px;">Course on Machine Learning</p></center>
+   <center><p style="font-size:25px;color:white;margin-top:10px;"> Decision Tree ML Project Deployment</p></center>
+   <center><p style="font-size:25px;color:white;margin-top:10px;"> By:- Dr. Navin Kr. Goyal</p></center>
    </div>
    </div>
    </div>
