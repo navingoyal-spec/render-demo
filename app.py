@@ -4,13 +4,15 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 #st.set_option('deprecation.showfileUploaderEncoding', False)
 # Load the pickled model
 pickle_in = open("decision_model.pkl","rb")
 model=pickle.load(pickle_in)
-
+pickle_in2 = open("scalar.pkl","rb")
+scalar=pickle.load(pickle_in2)
 def predict_note_authentication(UserID, Gender,Age,EstimatedSalary):
-  output= model.predict([[Age,EstimatedSalary]])
+  output= model.predict(scalar.transform(([[Age,Estimated_Salary]])))
   print("Purchased", output)
   if output==[1]:
     prediction="Item will be purchased"
