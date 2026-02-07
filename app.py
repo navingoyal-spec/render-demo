@@ -1,56 +1,149 @@
 import streamlit as st
-from PIL import Image
 import pickle
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
 from sklearn.preprocessing import StandardScaler
 
-# Load the pickled model
+# ---------------- PAGE CONFIG ----------------
+st.set_page_config(
+    page_title="Item Purchase Prediction",
+    page_icon="🛒",
+    layout="wide"
+)
+
+# ---------------- LOAD MODEL ----------------
 with open("decision_model.pkl", "rb") as f:
     model = pickle.load(f)
 
 with open("scalar.pkl", "rb") as f:
     scalar = pickle.load(f)
 
+# ---------------- CUSTOM CSS ----------------
+st.markdown("""
+<style>
+body {
+    background-color: #f5f7fa;
+}
+.header {
+    background: linear-gradient(90deg, #1e3c72, #2a5298);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+}
+.card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+.result-success {
+    background-color: #e8f5e9;
+    padding: 20px;
+    border-radius: 10px;
+    color: #2e7d32;
+    font-size: 20px;
+    text-align: center;
+}
+.result-fail {
+    background-color: #ffebee;
+    padding: 20px;
+    border-radius: 10px;
+    color: #c62828;
+    font-size: 20px;
+    text-align: center;
+}
+.footer {
+    text-align: center;
+    color: gray;
+    font-size: 14px;
+    margin-top: 30px;
+}
+</style>
+""", unsafe_allow_html=True)
 
-def predict_note_authentication(UserID, Gender, Age, EstimatedSalary):
+# ---------------- HEADER ----------------
+st.markdown("""
+<div class="header">
+    <h1>Poornima Institute of Engineering & Technology</h1>
+    <h3>Course on Machine Learning</h3>
+    <h4>Decision Tree ML Project Deployment</h4>
+    <p><b>By: Dr. Navin Kr. Goyal</b></p>
+</div>
+""", unsafe_allow_html=True)
+
+st.write("")
+
+# ---------------- PREDICTION FUNCTION ----------------
+def predict_note_authentication(Age, EstimatedSalary):
     output = model.predict(scalar.transform([[Age, EstimatedSalary]]))
-    prediction = output[0]
-    return prediction
+    return output[0]
 
+# ---------------- SIDEBAR ----------------
+st.sidebar.header("🧾 User Information")
 
-def main():
+UserID = st.sidebar.text_input("User ID")
+Gender = st.sidebar.selectbox("Gender", ("Male", "Female"))
+Age = st.sidebar.number_input("Age", min_value=5, max_value=150, step=1)
+EstimatedSalary = st.sidebar.number_input(
+    "Estimated Salary (₹)",
+    min_value=1,
+    max_value=1500000,
+    step=1000
+)
 
-    html_temp = """
-    <div style="background-color:blue;padding:10px">
-        <center><p style="font-size:40px;color:white;">Poornima Institute of Engineering & Technology</p></center>
-        <center><p style="font-size:30px;color:white;">Course on Machine Learning</p></center>
-        <center><p style="font-size:25px;color:white;">Decision Tree ML Project Deployment</p></center>
-        <center><p style="font-size:25px;color:white;">By:- Dr. Navin Kr. Goyal</p></center>
-    </div>
-    """
-    st.markdown(html_temp, unsafe_allow_html=True)
+predict_btn = st.sidebar.button("🔮 Predict")
+about_btn = st.sidebar.button("ℹ️ About")
 
-    st.header("Item Purchase Prediction")
+# ---------------- MAIN CONTENT ----------------
+col1, col2 = st.columns([2, 1])
 
-    UserID = st.text_input("UserID", "")
-    Gender = st.selectbox("Gender", ("Male", "Female"))
-    Age = st.number_input("Insert Age", min_value=5, max_value=150)
-    EstimatedSalary = st.number_input("Insert Salary", min_value=1, max_value=1500000)
+with col1:
+    st.markdown("<div class='card'>", unsafe_allow_html=True)
+    st.subheader("📊 Item Purchase Prediction System")
+    st.write("""
+    This application predicts whether a user is likely to purchase an item
+    based on **Age** and **Estimated Salary**, using a **Decision Tree Machine Learning model**.
+    """)
+    st.markdown("</div>", unsafe_allow_html=True)
 
-    if st.button("Predict"):
-        result = predict_note_authentication(UserID, Gender, Age, EstimatedSalary)
+with col2:
+    if predict_btn:
+        result = predict_note_authentication(Age, EstimatedSalary)
 
         if result == 1:
-            st.success("Model has predicted that user can purchased item ✅")
+            st.markdown("""
+            <div class="result-success">
+                ✅ User is likely to purchase the item
+            </div>
+            """, unsafe_allow_html=True)
         else:
-            st.warning("Model has predicted that user can not purchased item ❌")
+            st.markdown("""
+            <div class="result-fail">
+                ❌ User is not likely to purchase the item
+            </div>
+            """, unsafe_allow_html=True)
 
-    if st.button("About"):
-        st.subheader("Developed by Dr. Navin Kr. Goyal")
-        st.subheader("Associate Professor")
+# ---------------- ABOUT SECTION ----------------
+if about_btn:
+    st.markdown("<div class='card'>", unsafe_allow_html=True)
+    st.subheader("👨‍🏫 About the Developer")
+    st.write("""
+    **Dr. Navin Kr. Goyal**  
+    Associate Professor  
+    Department of Computer Science & Engineering  
 
+    **Specialization:**  
+    - Machine Learning  
+    - Data Analytics  
+    - Artificial Intelligence  
 
-if __name__ == "__main__":
-    main()
+    This project is developed for **academic learning and deployment demonstration**.
+    """)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# ---------------- FOOTER ----------------
+st.markdown("""
+<div class="footer">
+    © 2026 | Machine Learning Project | PIET Jaipur
+</div>
+""", unsafe_allow_html=True)
