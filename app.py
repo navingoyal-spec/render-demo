@@ -75,7 +75,11 @@ st.write("")
 
 # ---------------- PREDICTION FUNCTION ----------------
 def predict_note_authentication(Age, EstimatedSalary):
-    output = model.predict(scalar.transform([[Age, EstimatedSalary]]))
+    if(Gender=='Male'):
+        Gender=1
+    else:
+        Gender=0
+    output = model.predict(scalar.transform([[Gender,Age, EstimatedSalary]]))
     return output[0]
 
 # ---------------- SIDEBAR ----------------
@@ -108,7 +112,7 @@ with col1:
 
 with col2:
     if predict_btn:
-        result = predict_note_authentication(Age, EstimatedSalary)
+        result = predict_note_authentication(Gender,Age, EstimatedSalary)
 
         if result == 1:
             st.markdown("""
