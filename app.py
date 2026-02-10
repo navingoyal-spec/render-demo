@@ -74,7 +74,7 @@ st.markdown("""
 st.write("")
 
 # ---------------- PREDICTION FUNCTION ----------------
-def predict_note_authentication(Age, EstimatedSalary):
+def predict_note_authentication(Gender,Age, EstimatedSalary):
     if(Gender=='Male'):
         Gender=1
     else:
