@@ -72,7 +72,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.write("")
+#st.write("")
 
 # ---------------- PREDICTION FUNCTION ----------------
 def predict_note_authentication(Gender,Age, EstimatedSalary):
