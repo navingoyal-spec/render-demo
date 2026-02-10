@@ -64,8 +64,9 @@ body {
 # ---------------- HEADER ----------------
 st.markdown("""
 <div class="header">
-    <h1>Poornima Institute of Engineering & Technology</h1>
-    <h3>Course on Machine Learning</h3>
+    <h2>Poornima Institute of Engineering & Technology</h2>
+    <h3>Department of Computer Engineering</h3>
+    <h4>Course on Machine Learning</h4>
     <h4>Decision Tree ML Project Deployment</h4>
     <p><b>By: Dr. Navin Kr. Goyal</b></p>
 </div>
